@@ -14,13 +14,13 @@ using System.Windows.Shapes;
 namespace AdoNetWpfApp.View
 {
     /// <summary>
-    /// Логика взаимодействия для AddWindow.xaml
+    /// Логика взаимодействия для AddClientWindow.xaml
     /// </summary>
-    public partial class AddWindow : Window
+    public partial class AddClientWindow : Window
     {
-        private AddWindow() { InitializeComponent(); }
+        private AddClientWindow() { InitializeComponent(); }
 
-        public AddWindow(DataRow row) : this()
+        public AddClientWindow(DataRow row) : this()
         {
             cancelBtn.Click += delegate { this.DialogResult = false; };
             okBtn.Click += delegate

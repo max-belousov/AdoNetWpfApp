@@ -6,12 +6,7 @@
         xmlns:local="clr-namespace:AdoNetWpfApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid  >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="70*"/>
-            <ColumnDefinition Width="30*"/>
-        </Grid.ColumnDefinitions>
-
+    <Grid>
         <DataGrid x:Name="gridView"
                   IsSynchronizedWithCurrentItem="True"
                   SelectionMode="Single" 
@@ -47,12 +42,11 @@
                 <DataGridTextColumn x:Name="Email" 
                                     Binding="{Binding Email}" 
                                     Header="Email"/>
-
-
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Добавить" Click="MenuItemAddClick"/>
+                    <MenuItem Header="Заказы" Click="MenuItemOrdersClick"/>
                     <MenuItem Header="Удалить" Click="MenuItemDeleteClick"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>

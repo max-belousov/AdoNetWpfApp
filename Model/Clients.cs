@@ -16,6 +16,11 @@ namespace AdoNetWpfApp.Model
             RowView = row;
         }
 
+        public SqlConnection Connection { get; set; }
+        public SqlDataAdapter DataAdapter { get; set; }
+        public DataTable DataTable { get; set; }
+        public DataRowView RowView { get; set; }
+
         private void Preparing()
         {
             #region Init
@@ -92,11 +97,6 @@ namespace AdoNetWpfApp.Model
             DataAdapter.Fill(DataTable);
 
         }
-
-        public SqlConnection Connection { get; set; }
-        public SqlDataAdapter DataAdapter { get; set; }
-        public DataTable DataTable { get; set; }
-        public DataRowView RowView { get; set; }
     }
 
 }
