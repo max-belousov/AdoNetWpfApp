@@ -24,6 +24,8 @@ namespace AdoNetWpfApp.View
         {
             InitializeComponent();
             _orders = new Orders(key, (DataRowView)gridView.SelectedItem);
+            gridView.DataContext = _orders.DataTable.DefaultView;
+
         }
 
         /// <summary>
@@ -93,9 +95,10 @@ namespace AdoNetWpfApp.View
         /// <param name="e"></param>
         private void OrderAddClick(object sender, RoutedEventArgs e)
         {
+            if (gridView.SelectedItem == null) return;
+            var email = ((DataRowView)gridView.SelectedItems[0]).Row["Email"].ToString();
             DataRow r = _orders.DataTable.NewRow();
-            DataTable m = new DataTable();
-            AddClientWindow add = new AddClientWindow(r);
+            AddOrderWindow add = new AddOrderWindow(r, email);
             add.ShowDialog();
 
 

@@ -29,7 +29,7 @@ namespace AdoNetWpfApp.Model
             //Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\delicia\Documents\MSAccessOnlineShopdb.accdb
             var connectionStringBuilder = new OleDbConnectionStringBuilder()
             {
-                Provider = "SQLOLEDB",
+                Provider = "Microsoft.ACE.OLEDB.12.0",
                 DataSource = @"C:\Users\delicia\Documents\MSAccessOnlineShopdb.accdb"
 
             };
@@ -44,7 +44,7 @@ namespace AdoNetWpfApp.Model
 
 
             //var sql = @"SELECT FROM Orders Order By Orders.Id WHERE Email = @Email";
-            var sql = @"SELECT FROM Orders Order By Orders.Id";
+            var sql = @"SELECT * FROM Orders Order By Orders.Id";
 
             DataAdapter.SelectCommand = new OleDbCommand(sql, Connection);
 
@@ -96,15 +96,15 @@ namespace AdoNetWpfApp.Model
 
 
             //DataAdapter.Fill(DataTable);
-            //try
-            //{
-            //    DataAdapter.Fill(DataTable);
+            try
+            {
+                DataAdapter.Fill(DataTable);
 
-            //}
-            //catch (Exception e)
-            //{
-            //    Debug.WriteLine(e);
-            //}
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
         }
     }
 

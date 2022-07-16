@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AdoNetWpfApp.View"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Добавление записи" Height="350" Width="400">
+        Title="Добавление клиента" Height="350" Width="400">
     <Window.Resources>
 
         <Style TargetType="TextBlock" x:Key="TextBlockStyle">

@@ -22,11 +22,11 @@
 
             <DataGridTextColumn x:Name="ItemName" 
                                 Binding="{Binding ItemName}" 
-                                Header="Имя Клиента"/>
+                                Header="ItemName"/>
 
             <DataGridTextColumn x:Name="ItemCode" 
                                 Binding="{Binding ItemCode}" 
-                                Header="Фамилия Клиента"/>
+                                Header="ItemCode"/>
             <DataGridTextColumn x:Name="Email" 
                                 Binding="{Binding Email}" 
                                 Header="Email"/>
