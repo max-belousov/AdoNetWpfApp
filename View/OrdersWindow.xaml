@@ -1,0 +1,40 @@
+﻿<Window x:Class="AdoNetWpfApp.View.OrdersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="OrdersWindow" Height="450" Width="800">
+    <DataGrid x:Name="OrdersGridView"
+              IsSynchronizedWithCurrentItem="True"
+              SelectionMode="Single" 
+              AutoGenerateColumns="False" 
+              ItemsSource="{Binding}"
+              IsReadOnly="False" 
+              CurrentCellChanged="GVCurrentCellChanged"
+              CellEditEnding="GVCellEditEnding">
+        <DataGrid.Columns>
+            <DataGridTextColumn x:Name="Id" 
+                                Binding="{Binding Id}" 
+                                Header="Id" 
+                                IsReadOnly="True"/>
+
+            <DataGridTextColumn x:Name="ItemName" 
+                                Binding="{Binding ItemName}" 
+                                Header="ItemName"/>
+
+            <DataGridTextColumn x:Name="ItemCode" 
+                                Binding="{Binding ItemCode}" 
+                                Header="ItemCode"/>
+            <DataGridTextColumn x:Name="Email" 
+                                Binding="{Binding Email}" 
+                                Header="Email"/>
+        </DataGrid.Columns>
+        <DataGrid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Добавить" Click="OrderAddClick"/>
+                <MenuItem Header="Удалить" Click="OrderDeleteClick"/>
+            </ContextMenu>
+        </DataGrid.ContextMenu>
+    </DataGrid>
+</Window>
