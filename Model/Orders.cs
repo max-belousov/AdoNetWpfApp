@@ -26,7 +26,6 @@ namespace AdoNetWpfApp.Model
         private void Preparing()
         {
             #region Init
-            //Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\delicia\Documents\MSAccessOnlineShopdb.accdb
             var connectionStringBuilder = new OleDbConnectionStringBuilder()
             {
                 Provider = "Microsoft.ACE.OLEDB.12.0",
@@ -43,28 +42,30 @@ namespace AdoNetWpfApp.Model
             #region select
 
 
-            //var sql = @"SELECT FROM Orders Order By Orders.Id WHERE Email = @Email";
-            var sql = @"SELECT * FROM Orders Order By Orders.Id";
+            //var sql = @"SELECT * FROM Orders Order By Orders.Id WHERE Email = @Email";
+            //var sql = @"SELECT * FROM Orders Order By Orders.Id";
+            //var sql = $@"SELECT * FROM Orders WHERE Email = @[{Key}] Order By Id ";
+            var sql = $@"SELECT * FROM Orders WHERE Email = @Email;";
+
 
             DataAdapter.SelectCommand = new OleDbCommand(sql, Connection);
 
-            //DataAdapter.SelectCommand.Parameters.Add("@Email", OleDbType.VarChar, 20, $"{Key}");
+            DataAdapter.SelectCommand.Parameters.Add("@Email", OleDbType.VarChar, 50, "Email").Value = Key;
+            //DataAdapter.SelectCommand.Parameters.Add($"@{Key}", OleDbType.VarChar, 20, "Email").SourceVersion = DataRowVersion.Original;
+
 
             #endregion
 
             #region insert
 
             sql = @"INSERT INTO Orders (ItemName, ItemCode, Email) 
-                                 VALUES (@ItemName, @ItemCode, @Email); 
-                     SET @Id = @@IDENTITY;";
+                                 VALUES (@ItemName, @ItemCode, @Email);";
 
             DataAdapter.InsertCommand = new OleDbCommand(sql, Connection);
 
-            DataAdapter.InsertCommand.Parameters.Add("@Id", OleDbType.Integer, 4, "Id").Direction = ParameterDirection.Output;
             DataAdapter.InsertCommand.Parameters.Add("@ItemName", OleDbType.VarChar, 20, "ItemName");
             DataAdapter.InsertCommand.Parameters.Add("@ItemCode", OleDbType.Integer, 20, "ItemCode");
-            DataAdapter.InsertCommand.Parameters.Add("@Email", OleDbType.VarChar, 20, "Email");
-
+            DataAdapter.InsertCommand.Parameters.Add("@Email", OleDbType.VarChar, 50, "Email");
 
             #endregion
 
@@ -81,7 +82,7 @@ namespace AdoNetWpfApp.Model
             DataAdapter.UpdateCommand.Parameters.Add("@Id", OleDbType.Integer, 0, "Id").SourceVersion = DataRowVersion.Original;
             DataAdapter.UpdateCommand.Parameters.Add("@ItemName", OleDbType.VarChar, 20, "ItemName");
             DataAdapter.UpdateCommand.Parameters.Add("@ItemCode", OleDbType.Integer, 20, "ItemCode");
-            DataAdapter.UpdateCommand.Parameters.Add("@Email", OleDbType.VarChar, 20, "Email");
+            DataAdapter.UpdateCommand.Parameters.Add("@Email", OleDbType.VarChar, 50, "Email");
 
             #endregion
 

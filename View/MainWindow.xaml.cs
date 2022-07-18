@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -112,9 +113,17 @@ namespace AdoNetWpfApp
 
         private void MenuItemOrdersClick(object sender, RoutedEventArgs e)
         {
-            var key = ((DataRowView)gridView.SelectedItems[0]).Row["Email"].ToString();
-            OrdersWindow orders = new OrdersWindow(key);
-            orders.ShowDialog();
+            try
+            {
+                var key = ((DataRowView)gridView.SelectedItems[0]).Row["Email"].ToString();
+                OrdersWindow orders = new OrdersWindow(key);
+                orders.ShowDialog();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Выберите клиента");
+            }
+
         }
     }
 }

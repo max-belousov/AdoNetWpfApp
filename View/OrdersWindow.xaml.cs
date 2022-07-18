@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -95,9 +96,20 @@ namespace AdoNetWpfApp.View
         /// <param name="e"></param>
         private void OrderAddClick(object sender, RoutedEventArgs e)
         {
-            if (gridView.SelectedItem == null) return;
+            //if (gridView.SelectedItem == null) return;
+            //string email = null;
+            //try
+            //{
+            //   email = ((DataRowView)gridView.SelectedItems[0]).Row["Email"].ToString();
+            //}
+            //catch (Exception exception)
+            //{
+            //    MessageBox.Show("Выберите клиента");
+            //}
             var email = ((DataRowView)gridView.SelectedItems[0]).Row["Email"].ToString();
+            //var email = "max.belousov.ne@gmail.com";
             DataRow r = _orders.DataTable.NewRow();
+            Debug.WriteLine(email);
             AddOrderWindow add = new AddOrderWindow(r, email);
             add.ShowDialog();
 
