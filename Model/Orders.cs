@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
-using System.Data.SqlClient;
-using System.Text;
 using System.Data.OleDb;
 using System.Diagnostics;
 
@@ -45,7 +41,7 @@ namespace AdoNetWpfApp.Model
             //var sql = @"SELECT * FROM Orders Order By Orders.Id WHERE Email = @Email";
             //var sql = @"SELECT * FROM Orders Order By Orders.Id";
             //var sql = $@"SELECT * FROM Orders WHERE Email = @[{Key}] Order By Id ";
-            var sql = $@"SELECT * FROM Orders WHERE Email = @Email;";
+            var sql = @"SELECT * FROM Orders WHERE Email = @Email;";
 
 
             DataAdapter.SelectCommand = new OleDbCommand(sql, Connection);

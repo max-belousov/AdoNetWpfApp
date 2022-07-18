@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AdoNetWpfApp.View"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Добавление заказа" Height="200" Width="400">
@@ -45,8 +44,8 @@
         <TextBox  Grid.Row="2" Style="{StaticResource TextBoxStyle}" x:Name="txtItemCode"/>
 
 
-        <Button Content="Добавить" Grid.Column="0" Grid.Row="4" Margin="5" FontSize="20" x:Name="okBtn" />
-        <Button Content="Отмена" Grid.Column="1" Grid.Row="4" Margin="5" FontSize="20" x:Name="cancelBtn"/>
+        <Button Content="Добавить" Grid.Column="0" Grid.Row="3" Margin="5" FontSize="20" x:Name="okBtn" />
+        <Button Content="Отмена" Grid.Column="1" Grid.Row="3" Margin="5" FontSize="20" x:Name="cancelBtn"/>
 
     </Grid>
 </Window>

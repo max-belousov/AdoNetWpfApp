@@ -1,21 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using AdoNetWpfApp.Model;
 using AdoNetWpfApp.View;
-using AdoNetWpfApp.ViewModel;
+
 
 namespace AdoNetWpfApp
 {
@@ -24,12 +13,12 @@ namespace AdoNetWpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ClientsViewModel _clientViewModel;
+        private readonly Clients _clients;
         public MainWindow()
         {
             InitializeComponent();
-            _clientViewModel = new ClientsViewModel((DataRowView)gridView.SelectedItem);
-            gridView.DataContext = _clientViewModel.Clients.DataTable.DefaultView;
+            _clients = new Clients((DataRowView)gridView.SelectedItem);
+            gridView.DataContext = _clients.DataTable.DefaultView;
         }
 
 
@@ -40,8 +29,8 @@ namespace AdoNetWpfApp
         /// <param name="e"></param>
         private void GVCellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            _clientViewModel.Clients.RowView = (DataRowView)gridView.SelectedItem;
-            _clientViewModel.Clients.RowView.BeginEdit();
+            _clients.RowView = (DataRowView)gridView.SelectedItem;
+            _clients.RowView.BeginEdit();
         }
 
         /// <summary>
@@ -51,16 +40,16 @@ namespace AdoNetWpfApp
         /// <param name="e"></param>
         private void GVCurrentCellChanged(object sender, EventArgs e)
         {
-            if (_clientViewModel.Clients.RowView == null) return;
-            _clientViewModel.Clients.RowView.EndEdit();
+            if (_clients.RowView == null) return;
+            _clients.RowView.EndEdit();
             try
             {
-                _clientViewModel.Clients.DataAdapter.Update(_clientViewModel.Clients.DataTable);
+                _clients.DataAdapter.Update(_clients.DataTable);
             }
             catch (Exception)
             {
                 MessageBox.Show("Для добавления клиента нажмите правую кнопку мыши");
-                _clientViewModel.Clients.RowView.Delete();
+                _clients.RowView.Delete();
             }
             
         }
@@ -74,21 +63,18 @@ namespace AdoNetWpfApp
         {
             try
             {
-                _clientViewModel.Clients.RowView = (DataRowView)gridView.SelectedItem;
+                _clients.RowView = (DataRowView)gridView.SelectedItem;
+                var choiceDelete = MessageBox.Show(this,
+                    $"Вы действительно хотите удалить {(((DataRowView)gridView.SelectedItems[0])!).Row["Email"]}?",
+                    "Удаление клиента",
+                    MessageBoxButton.YesNo);
+                if (choiceDelete == MessageBoxResult.No) return;
+                _clients.RowView?.Row.Delete();
+                _clients.DataAdapter.Update(_clients.DataTable);
             }
             catch (Exception)
             {
                 MessageBox.Show("Нельзя удалить пустой объект");
-            }
-            _clientViewModel.Clients.RowView?.Row.Delete();
-            try
-            {
-                _clientViewModel.Clients.DataAdapter.Update(_clientViewModel.Clients.DataTable);
-
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
             }
         }
 
@@ -99,15 +85,15 @@ namespace AdoNetWpfApp
         /// <param name="e"></param>
         private void MenuItemAddClick(object sender, RoutedEventArgs e)
         {
-            DataRow r = _clientViewModel.Clients.DataTable.NewRow();
-            AddClientWindow add = new AddClientWindow(r);
+            var r = _clients.DataTable.NewRow();
+            var add = new AddClientWindow(r);
             add.ShowDialog();
 
 
-            if (add.DialogResult.Value)
+            if (add.DialogResult != null && add.DialogResult.Value)
             {
-                _clientViewModel.Clients.DataTable.Rows.Add(r);
-                _clientViewModel.Clients.DataAdapter.Update(_clientViewModel.Clients.DataTable);
+                _clients.DataTable.Rows.Add(r);
+                _clients.DataAdapter.Update(_clients.DataTable);
             }
         }
 
@@ -115,11 +101,11 @@ namespace AdoNetWpfApp
         {
             try
             {
-                var key = ((DataRowView)gridView.SelectedItems[0]).Row["Email"].ToString();
-                OrdersWindow orders = new OrdersWindow(key);
+                var key = (((DataRowView)gridView.SelectedItems[0])!).Row["Email"].ToString();
+                var orders = new OrdersWindow(key);
                 orders.ShowDialog();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 MessageBox.Show("Выберите клиента");
             }

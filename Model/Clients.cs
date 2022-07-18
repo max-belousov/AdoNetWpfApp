@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace AdoNetWpfApp.Model
@@ -55,11 +51,11 @@ namespace AdoNetWpfApp.Model
             DataAdapter.InsertCommand = new SqlCommand(sql, Connection);
 
             DataAdapter.InsertCommand.Parameters.Add("@Id", SqlDbType.Int, 4, "Id").Direction = ParameterDirection.Output;
-            DataAdapter.InsertCommand.Parameters.Add("@FirstName", SqlDbType.NVarChar, 20, "FirstName");
-            DataAdapter.InsertCommand.Parameters.Add("@SecondName", SqlDbType.NVarChar, 20, "SecondName");
-            DataAdapter.InsertCommand.Parameters.Add("@ThirdName", SqlDbType.NVarChar, 20, "ThirdName");
+            DataAdapter.InsertCommand.Parameters.Add("@FirstName", SqlDbType.NVarChar, 40, "FirstName");
+            DataAdapter.InsertCommand.Parameters.Add("@SecondName", SqlDbType.NVarChar, 40, "SecondName");
+            DataAdapter.InsertCommand.Parameters.Add("@ThirdName", SqlDbType.NVarChar, 40, "ThirdName");
             DataAdapter.InsertCommand.Parameters.Add("@Email", SqlDbType.NVarChar, 50, "Email");
-            DataAdapter.InsertCommand.Parameters.Add("@Phone", SqlDbType.NVarChar, 10, "Phone");
+            DataAdapter.InsertCommand.Parameters.Add("@Phone", SqlDbType.NVarChar, 15, "Phone");
 
             #endregion
 
@@ -76,11 +72,11 @@ namespace AdoNetWpfApp.Model
 
             DataAdapter.UpdateCommand = new SqlCommand(sql, Connection);
             DataAdapter.UpdateCommand.Parameters.Add("@Id", SqlDbType.Int, 0, "Id").SourceVersion = DataRowVersion.Original;
-            DataAdapter.UpdateCommand.Parameters.Add("@FirstName", SqlDbType.NVarChar, 20, "FirstName");
-            DataAdapter.UpdateCommand.Parameters.Add("@SecondName", SqlDbType.NVarChar, 20, "SecondName");
-            DataAdapter.UpdateCommand.Parameters.Add("@ThirdName", SqlDbType.NVarChar, 20, "ThirdName");
+            DataAdapter.UpdateCommand.Parameters.Add("@FirstName", SqlDbType.NVarChar, 40, "FirstName");
+            DataAdapter.UpdateCommand.Parameters.Add("@SecondName", SqlDbType.NVarChar, 40, "SecondName");
+            DataAdapter.UpdateCommand.Parameters.Add("@ThirdName", SqlDbType.NVarChar, 40, "ThirdName");
             DataAdapter.UpdateCommand.Parameters.Add("@Email", SqlDbType.NVarChar, 50, "Email");
-            DataAdapter.UpdateCommand.Parameters.Add("@Phone", SqlDbType.NVarChar, 10, "Phone");
+            DataAdapter.UpdateCommand.Parameters.Add("@Phone", SqlDbType.NVarChar, 15, "Phone");
 
             #endregion
 
